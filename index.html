@@ -186,7 +186,27 @@ select.form-input {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M1 4l5 5 5-5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
+  background-size: 12px;
+  background-color: white;
   padding-right: 30px;
+  color: var(--color-slate-900);
+  cursor: pointer;
+}
+
+select.form-input:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+select.form-input option {
+  color: var(--color-slate-900);
+  background: white;
+  padding: 3px 0;
+}
+
+select.form-input option:disabled {
+  color: #ccc;
 }
 
 .expenses-grid {
@@ -199,8 +219,9 @@ select.form-input {
   background: #fafafa;
   border: 1px solid #eee;
   border-radius: 8px;
-  padding: 16px;
+  padding: 12px;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .expense-card:hover {
@@ -211,16 +232,26 @@ select.form-input {
   font-size: 13px;
   font-weight: 600;
   color: var(--color-slate-900);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .expense-card-row {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .expense-card-row.stacked {
+  flex-direction: column;
+}
+
+.expense-card-row > div {
+  flex: 1;
+  min-width: 0;
+  display: flex;
   flex-direction: column;
 }
 
@@ -230,16 +261,21 @@ select.form-input {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 13px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .expense-subtotal {
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 8px;
+  padding-top: 8px;
   border-top: 1px solid #ddd;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color-teal-500);
   font-weight: 600;
   text-align: right;
+  white-space: nowrap;
 }
 
 .total-box {
@@ -326,6 +362,182 @@ select.form-input {
   border-color: var(--color-teal-500);
 }
 
+/* Dark mode toggle */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--color-primary);
+  border: none;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .container {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode .form-section {
+  background: #2a2a2a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .expense-card {
+  background: #333333;
+  border-color: #444444;
+}
+
+body.dark-mode .form-input {
+  background: #3a3a3a;
+  border-color: #444444;
+  color: #e0e0e0;
+}
+
+body.dark-mode .form-input:focus {
+  border-color: var(--color-teal-300);
+  box-shadow: 0 0 0 3px rgba(50, 184, 198, 0.2);
+}
+
+body.dark-mode .form-label {
+  color: #b0b0b0;
+}
+
+body.dark-mode .section-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .total-box {
+  background: linear-gradient(135deg, #2a6f7d 0%, #235968 100%);
+}
+
+body.dark-mode .service-btn {
+  background: #3a3a3a;
+  border-color: #444444;
+  color: #e0e0e0;
+}
+
+body.dark-mode .service-btn:hover {
+  border-color: var(--color-teal-300);
+  background: rgba(50, 184, 198, 0.1);
+}
+
+body.dark-mode .service-btn.selected {
+  background: var(--color-teal-300);
+  color: #1a1a1a;
+  border-color: var(--color-teal-300);
+}
+
+body.dark-mode .expense-card-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .expense-subtotal {
+  border-top-color: #444444;
+  color: var(--color-teal-300);
+}
+
+body.dark-mode .btn-secondary {
+  background: #3a3a3a;
+  color: #e0e0e0;
+  border-color: #444444;
+}
+
+body.dark-mode .btn-secondary:hover {
+  background: #444444;
+}
+
+body.dark-mode textarea.form-input {
+  background: #3a3a3a;
+  border-color: #444444;
+  color: #e0e0e0;
+}
+
+body.dark-mode select.form-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M1 4l5 5 5-5'/%3E%3C/svg%3E");
+  background-color: #3a3a3a;
+  background-size: 12px;
+  color: #e0e0e0;
+  border: 1px solid #555555;
+}
+
+body.dark-mode select.form-input:hover {
+  background-color: #3a3a3a;
+  border-color: var(--color-teal-300);
+}
+
+body.dark-mode select.form-input:focus {
+  background-color: #3a3a3a;
+  border-color: var(--color-teal-300);
+  box-shadow: 0 0 0 3px rgba(50, 184, 198, 0.2);
+}
+
+body.dark-mode select.form-input option {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+body.dark-mode select.form-input:disabled {
+  background-color: #2a2a2a;
+  color: #666;
+}
+
+body.dark-mode .tabs {
+  border-bottom-color: #444444;
+}
+
+body.dark-mode .tab-btn {
+  color: #b0b0b0;
+}
+
+body.dark-mode .tab-btn.active {
+  color: var(--color-teal-300);
+  border-bottom-color: var(--color-teal-300);
+}
+
+body.dark-mode .tab-btn:hover {
+  color: var(--color-teal-300);
+}
+
+/* Modal dark mode */
+body.dark-mode #pdfModal {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode #pdfModal div {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+body.dark-mode #pdfModal h2 {
+  color: #e0e0e0;
+}
+
+body.dark-mode #pdfModal p {
+  color: #b0b0b0;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr;
@@ -337,6 +549,10 @@ select.form-input {
 
   .header h1 {
     font-size: 20px;
+  }
+
+  .header p {
+    font-size: 12px;
   }
 
   .tabs {
@@ -360,6 +576,221 @@ select.form-input {
     min-width: auto;
     width: 100%;
   }
+
+  .theme-toggle {
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .form-label {
+    font-size: 11px;
+  }
+
+  .form-input {
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+
+  .expense-card {
+    padding: 12px;
+  }
+
+  .expense-card-title {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .expense-card-row input {
+    font-size: 12px;
+    padding: 7px 8px;
+  }
+
+  .total-box {
+    font-size: 20px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  .service-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .service-buttons {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 20px 15px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 18px;
+    margin-bottom: 3px;
+  }
+
+  .header p {
+    font-size: 11px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .tabs {
+    gap: 3px;
+    margin-bottom: 20px;
+  }
+
+  .tab-btn {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .form-section {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .form-grid {
+    gap: 15px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .form-label {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+
+  .form-input {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .expense-card {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .expense-card-title {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .expense-card-row {
+    gap: 8px;
+  }
+
+  .expense-card-row input {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+
+  .expense-subtotal {
+    font-size: 11px;
+    margin-top: 8px;
+  }
+
+  .total-box {
+    font-size: 18px;
+    padding: 12px;
+    margin-top: 12px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 13px;
+    min-width: 120px;
+  }
+
+  .button-group {
+    margin-top: 20px;
+  }
+
+  .service-btn {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+
+  .service-buttons {
+    gap: 6px;
+  }
+
+  .theme-toggle {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+}
+
+/* Tablets (768px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .expenses-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .header {
+    padding: 25px 20px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 15px;
+  }
+}
+
+/* Landscape mode adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+  }
+
+  .header h1 {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .form-section {
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
 }
 
 @media print {
@@ -379,6 +810,8 @@ select.form-input {
   </style>
 </head>
 <body>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Alternar modo noturno">🌙</button>
+  
   <div class="container">
     <div class="header">
       <h1>📄 Sistema de Recibos Profissional</h1>
@@ -845,29 +1278,45 @@ function sincronizarCamposComuns() {
 }
 
 function initializeStates() {
-  const url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome';
-
-  fetch(url)
+  var selects = ['estadoDiarias', 'estadoDespesas', 'estadoAdiantamento', 'estadoReciboDiarias', 'estadoReciboDespesas', 'estadoReciboAdiantamento'];
+  var url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome';
+  
+  console.log('Iniciando carregamento de estados...');
+  
+  fetch(url, { timeout: 10000 })
     .then(function(response) {
+      console.log('Resposta recebida:', response.status);
+      if (!response.ok) throw new Error('HTTP ' + response.status);
       return response.json();
     })
     .then(function(estados) {
-      var selects = ['estadoDiarias', 'estadoDespesas', 'estadoAdiantamento', 'estadoReciboDiarias', 'estadoReciboDespesas', 'estadoReciboAdiantamento'];
-
-      selects.forEach(function(selectId) {
-        var select = document.getElementById(selectId);
-        if (!select) return;
-
+      console.log('Estados carregados:', estados.length);
+      if (Array.isArray(estados) && estados.length > 0) {
         var html = '<option value="">Selecione o estado</option>';
         estados.forEach(function(uf) {
-          html += '<option value="' + uf.id + '" data-sigla="' + uf.sigla + '">' + uf.sigla + ' - ' + uf.nome + '</option>';
+          html += '<option value="' + uf.id + '">' + uf.sigla + ' - ' + uf.nome + '</option>';
         });
-        select.innerHTML = html;
-      });
+        
+        selects.forEach(function(selectId) {
+          var select = document.getElementById(selectId);
+          if (select) {
+            console.log('Preenchendo:', selectId);
+            select.innerHTML = html;
+          }
+        });
+      } else {
+        throw new Error('Nenhum estado retornado');
+      }
     })
     .catch(function(err) {
-      console.error('Erro ao carregar estados IBGE', err);
-      alert('Erro ao carregar estados. Tente recarregar a página.');
+      console.error('Erro detalhado:', err.message);
+      var errorHtml = '<option value="">Erro: ' + err.message + '</option>';
+      selects.forEach(function(selectId) {
+        var select = document.getElementById(selectId);
+        if (select) {
+          select.innerHTML = errorHtml;
+        }
+      });
     });
 }
 
@@ -907,7 +1356,7 @@ function updateCidadesIBGE(estadoSelectId, cidadeSelectId) {
   }
 
   cidadeSelect.innerHTML = '<option value="">Carregando...</option>';
-  cidadeSelect.disabled = true;
+  cidadeSelect.disabled = false;
 
   if (estadosCache[ufId]) {
     preencherCidades(cidadeSelect, estadosCache[ufId]);
@@ -918,23 +1367,30 @@ function updateCidadesIBGE(estadoSelectId, cidadeSelectId) {
 
   fetch(url)
     .then(function(response) {
+      if (!response.ok) throw new Error('Erro ao carregar municípios');
       return response.json();
     })
     .then(function(municipios) {
-      estadosCache[ufId] = municipios;
-      preencherCidades(cidadeSelect, municipios);
+      if (Array.isArray(municipios) && municipios.length > 0) {
+        estadosCache[ufId] = municipios;
+        preencherCidades(cidadeSelect, municipios);
+      } else {
+        cidadeSelect.innerHTML = '<option value="">Nenhuma cidade encontrada</option>';
+      }
     })
     .catch(function(err) {
-      console.error('Erro ao carregar municípios IBGE', err);
+      console.error('Erro ao carregar municípios IBGE:', err);
       cidadeSelect.innerHTML = '<option value="">Erro ao carregar cidades</option>';
     });
 }
 
 function preencherCidades(cidadeSelect, municipios) {
   var html = '<option value="">Selecione a cidade</option>';
-  municipios.forEach(function(municipio) {
-    html += '<option value="' + municipio.nome + '">' + municipio.nome + '</option>';
-  });
+  if (Array.isArray(municipios) && municipios.length > 0) {
+    municipios.forEach(function(municipio) {
+      html += '<option value="' + municipio.nome + '">' + municipio.nome + '</option>';
+    });
+  }
   cidadeSelect.innerHTML = html;
   cidadeSelect.disabled = false;
 }
@@ -1479,7 +1935,38 @@ function capitalizarNome(texto) {
     .join(' ');
 }
 
+var currentTheme = 'light';
+
+function toggleTheme() {
+  var body = document.body;
+  var button = document.querySelector('.theme-toggle');
+  
+  body.classList.toggle('dark-mode');
+  
+  if (body.classList.contains('dark-mode')) {
+    button.textContent = '☀️';
+    currentTheme = 'dark';
+  } else {
+    button.textContent = '🌙';
+    currentTheme = 'light';
+  }
+}
+
+function initializeTheme() {
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (prefersDark) {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.theme-toggle').textContent = '☀️';
+    currentTheme = 'dark';
+  } else {
+    document.querySelector('.theme-toggle').textContent = '🌙';
+    currentTheme = 'light';
+  }
+}
+
 window.addEventListener('DOMContentLoaded', function() {
+  initializeTheme();
   initializeStates();
   sincronizarCamposComuns();
 });

@@ -182,15 +182,11 @@ body {
 }
 
 select.form-input {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M1 4l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
+  appearance: auto;
   background-color: white;
-  padding-right: 30px;
   color: var(--color-slate-900);
   cursor: pointer;
+  padding: 10px 12px;
 }
 
 select.form-input:disabled {
@@ -474,9 +470,7 @@ body.dark-mode textarea.form-input {
 }
 
 body.dark-mode select.form-input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M1 4l5 5 5-5'/%3E%3C/svg%3E");
   background-color: #3a3a3a;
-  background-size: 12px;
   color: #e0e0e0;
   border: 1px solid #555555;
 }
@@ -814,7 +808,7 @@ body.dark-mode #pdfModal p {
   
   <div class="container">
     <div class="header">
-      <h1>📄 Gerador de Recibos Automaticos</h1>
+      <h1>📄 Sistema de Recibos Profissional</h1>
       <p>Faça seu Recibo de forma prática e rápida ...</p>
     </div>
 
@@ -988,7 +982,6 @@ body.dark-mode #pdfModal p {
       <div class="button-group">
         <button class="btn btn-primary" onclick="gerarReciboDiarias()">📄 Gerar Recibo</button>
       </div>
-    </div>
     </div>
 
     <!-- ABA DESPESAS -->
